@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Do you love me?</title>
+    <style>
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffe6f2;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        #phase1, #phase2, #phase3 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #phase2, #phase3 {
+            display: none; 
+        }
+
+        h1 {
+            color: #ff3385;
+            font-size: 2.5rem;
+            margin: 20px 0;
+        }
+
+        img {
+            max-width: 300px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .button-container {
+            position: relative;
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #ff4d94;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+            margin: 0 10px;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+        }
+
+        #no-btn {
+            background-color: #a6a6a6;
+        }
+
+        .heart {
+            background-color: #ff3385;
+            display: inline-block;
+            height: 50px;
+            position: relative;
+            width: 50px;
+            transform: rotate(-45deg);
+            animation: heartbeat 1.2s infinite;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: "";
+            background-color: #ff3385;
+            border-radius: 50%;
+            height: 50px;
+            position: absolute;
+            width: 50px;
+        }
+
+        .heart::before {
+            top: -25px;
+            left: 0;
+        }
+
+        .heart::after {
+            left: 25px;
+            top: 0;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: rotate(-45deg) scale(0.8); }
+            5% { transform: rotate(-45deg) scale(0.9); }
+            10% { transform: rotate(-45deg) scale(0.8); }
+            15% { transform: rotate(-45deg) scale(1); }
+            50% { transform: rotate(-45deg) scale(0.8); }
+            100% { transform: rotate(-45deg) scale(0.8); }
+        }
+
+        .loading-text {
+            margin-top: 40px;
+            color: #ff3385;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="phase1">
+        <img src="Teddy Bear GIF.gif" alt="Nerven" >
+
+        
+        <h1>Do you love me?</h1>
+        
+        <div class="button-container">
+            <button id="yes-btn">Yes</button>
+            <button id="no-btn">No</button>
+        </div>
+    </div>
+
+    <div id="phase2">
+        <div class="heart"></div>
+        <div class="loading-text">Hmmmmm Check answer...</div>
+    </div>
+
+    <div id="phase3">
+        <img src="Hugging Hug GIF.gif" alt="Umarmung">
+        
+        <h1>I knew it! ❤️</h1>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('no-btn');
+        const yesBtn = document.getElementById('yes-btn');
+        const phase1 = document.getElementById('phase1');
+        const phase2 = document.getElementById('phase2');
+        const phase3 = document.getElementById('phase3');
+
+        function moveButton() {
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+        }
+
+        noBtn.addEventListener('mouseover', moveButton);
+        noBtn.addEventListener('touchstart', moveButton);
+
+        yesBtn.addEventListener('click', () => {
+            phase1.style.display = 'none';
+            phase2.style.display = 'flex';
+
+            setTimeout(() => {
+                phase2.style.display = 'none';
+                phase3.style.display = 'flex';
+            }, 4000); 
+        });
+    </script>
+
+</body>
+</html>
